@@ -1,0 +1,77 @@
+{
+  "name": "Pattern Learning Test Suite",
+  "description": "Test the system's ability to learn from corrections and apply patterns",
+  "created": "2025-08-02",
+  "test_sequence": [
+    {
+      "phase": "Initial Extraction",
+      "documents": [
+        {
+          "file": "tests/test-documents/invoices/various-vendors/acme_001.pdf",
+          "expected": {
+            "vendor": "ACME Corporation",
+            "invoice_number": "ACME-2024-001"
+          }
+        },
+        {
+          "file": "tests/test-documents/invoices/various-vendors/acme_002.pdf",
+          "expected": {
+            "vendor": "ACME Corporation",
+            "invoice_number": "ACME-2024-002"
+          }
+        },
+        {
+          "file": "tests/test-documents/invoices/various-vendors/acme_003.pdf",
+          "expected": {
+            "vendor": "ACME Corporation",
+            "invoice_number": "ACME-2024-003"
+          }
+        }
+      ]
+    },
+    {
+      "phase": "User Corrections",
+      "corrections": [
+        {
+          "document": "acme_001.pdf",
+          "field": "vendor",
+          "from": "ACME",
+          "to": "ACME Corporation"
+        },
+        {
+          "document": "acme_002.pdf",
+          "field": "vendor",
+          "from": "ACME",
+          "to": "ACME Corporation"
+        }
+      ]
+    },
+    {
+      "phase": "Test Learning",
+      "documents": [
+        {
+          "file": "tests/test-documents/invoices/various-vendors/acme_004.pdf",
+          "expected": {
+            "vendor": "ACME Corporation",
+            "invoice_number": "ACME-2024-004"
+          },
+          "success_criteria": "Should extract 'ACME Corporation' not just 'ACME'"
+        },
+        {
+          "file": "tests/test-documents/invoices/various-vendors/acme_005.pdf",
+          "expected": {
+            "vendor": "ACME Corporation",
+            "invoice_number": "ACME-2024-005"
+          },
+          "success_criteria": "Pattern should persist"
+        }
+      ]
+    }
+  ],
+  "metrics_to_track": [
+    "accuracy_before_correction",
+    "accuracy_after_correction",
+    "confidence_improvement",
+    "pattern_match_rate"
+  ]
+}

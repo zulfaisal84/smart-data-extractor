@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR Testing Interface - Smart Data Extractor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📄 OCR Testing Interface</h1>
+            <p>Test document reading capabilities</p>
+        </header>
+
+        <main>
+            <!-- File Upload Section -->
+            <section class="upload-section">
+                <h2>📤 Upload Document</h2>
+                
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <div class="upload-icon">📄</div>
+                        <h3>Drag & Drop Document Here</h3>
+                        <p>or click to browse files</p>
+                        <p class="file-types">Supports: PDF, JPG, PNG</p>
+                    </div>
+                    <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png" hidden>
+                </div>
+
+                <div class="file-info" id="fileInfo" style="display: none;">
+                    <div class="file-details">
+                        <span class="file-name" id="fileName"></span>
+                        <span class="file-size" id="fileSize"></span>
+                        <span class="file-type" id="fileType"></span>
+                    </div>
+                    <button class="remove-file" id="removeFile">❌</button>
+                </div>
+            </section>
+
+            <!-- OCR Service Selector -->
+            <section class="service-section">
+                <h2>🔧 OCR Service</h2>
+                <select id="ocrService" class="service-select">
+                    <option value="tesseract">Tesseract (Default)</option>
+                    <option value="google">Google Vision</option>
+                    <option value="aws-textract">AWS Textract</option>
+                </select>
+            </section>
+
+            <!-- Action Buttons -->
+            <section class="actions-section">
+                <button id="processBtn" class="btn btn-primary" disabled>Process Document</button>
+                <button id="clearBtn" class="btn btn-secondary">Clear</button>
+            </section>
+
+            <!-- Results Display -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <h2>📊 Results</h2>
+                
+                <div class="processing-status" id="processingStatus">
+                    <div class="spinner"></div>
+                    <p>Processing document...</p>
+                </div>
+
+                <div class="result-content" id="resultContent" style="display: none;">
+                    <div class="result-meta">
+                        <span class="processing-time" id="processingTime"></span>
+                        <span class="confidence-score" id="confidenceScore"></span>
+                    </div>
+                    <textarea id="extractedText" class="extracted-text" readonly placeholder="Extracted text will appear here..."></textarea>
+                </div>
+
+                <div class="error-content" id="errorContent" style="display: none;">
+                    <div class="error-message">
+                        <h3>❌ Error Processing Document</h3>
+                        <p id="errorText"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- History Log -->
+            <section class="history-section">
+                <h2>📋 Recent Uploads</h2>
+                <div class="history-list" id="historyList">
+                    <p class="no-history">No documents processed yet</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Smart Data Extractor - OCR Testing Prototype</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

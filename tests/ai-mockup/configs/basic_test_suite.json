@@ -1,0 +1,71 @@
+{
+  "name": "Basic AI Extraction Test Suite",
+  "description": "Test basic field extraction across different AI services",
+  "created": "2025-08-02",
+  "tests": [
+    {
+      "file": "tests/test-documents/invoices/clear/invoice_001.pdf",
+      "type": "invoice",
+      "quality": "clear",
+      "expected": {
+        "invoice_number": "INV-2024-001",
+        "date": "2024-10-15",
+        "vendor": "ABC Corporation",
+        "amount": "1234.56",
+        "currency": "USD"
+      }
+    },
+    {
+      "file": "tests/test-documents/invoices/clear/invoice_002.pdf",
+      "type": "invoice", 
+      "quality": "clear",
+      "expected": {
+        "invoice_number": "INV-2024-002",
+        "date": "2024-10-16",
+        "vendor": "XYZ Industries",
+        "amount": "2345.67",
+        "currency": "USD"
+      }
+    },
+    {
+      "file": "tests/test-documents/receipts/retail/receipt_001.jpg",
+      "type": "receipt",
+      "quality": "medium",
+      "expected": {
+        "store_name": "Target",
+        "date": "2024-10-15",
+        "total": "45.23",
+        "payment_method": "Credit Card"
+      }
+    },
+    {
+      "file": "tests/test-documents/receipts/restaurant/receipt_002.jpg",
+      "type": "receipt",
+      "quality": "poor",
+      "expected": {
+        "store_name": "Joe's Pizza",
+        "date": "2024-10-14",
+        "total": "28.50",
+        "tip": "5.70"
+      }
+    },
+    {
+      "file": "tests/test-documents/purchase-orders/standard/po_001.pdf",
+      "type": "purchase_order",
+      "quality": "clear",
+      "expected": {
+        "po_number": "PO-2024-1234",
+        "date": "2024-10-10",
+        "vendor": "Supply Chain Co",
+        "total": "5678.90",
+        "delivery_date": "2024-10-25"
+      }
+    }
+  ],
+  "settings": {
+    "timeout_per_document": 30,
+    "retry_on_failure": true,
+    "max_retries": 3,
+    "save_extracted_images": true
+  }
+}

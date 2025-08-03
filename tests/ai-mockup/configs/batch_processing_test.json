@@ -1,0 +1,94 @@
+{
+  "name": "Batch Processing Test Suite",
+  "description": "Test handling of multiple documents with different patterns",
+  "created": "2025-08-02",
+  "test_scenarios": [
+    {
+      "name": "Same Vendor Batch",
+      "description": "50 invoices from the same vendor",
+      "documents": {
+        "pattern": "tests/test-documents/invoices/various-vendors/abc_corp_{001-050}.pdf",
+        "count": 50,
+        "expected_grouping": "single_pattern"
+      },
+      "success_criteria": {
+        "pattern_detection_time": "<2s",
+        "total_processing_time": "<30s",
+        "accuracy": ">95%"
+      }
+    },
+    {
+      "name": "Mixed Document Types",
+      "description": "100 documents of different types",
+      "documents": {
+        "invoices": 40,
+        "receipts": 35,
+        "purchase_orders": 20,
+        "unknown": 5
+      },
+      "expected_behavior": {
+        "classification_accuracy": ">90%",
+        "group_processing": true,
+        "parallel_execution": true
+      }
+    },
+    {
+      "name": "Quality Variation Batch",
+      "description": "Documents with varying quality",
+      "documents": [
+        {
+          "quality": "high",
+          "count": 20,
+          "expected_confidence": ">90%"
+        },
+        {
+          "quality": "medium",
+          "count": 15,
+          "expected_confidence": "70-90%"
+        },
+        {
+          "quality": "poor",
+          "count": 10,
+          "expected_confidence": "50-70%"
+        },
+        {
+          "quality": "very_poor",
+          "count": 5,
+          "expected_confidence": "<50%"
+        }
+      ]
+    },
+    {
+      "name": "Edge Case Mix",
+      "description": "Batch with problematic documents",
+      "documents": [
+        {
+          "type": "blank_pages",
+          "count": 3,
+          "expected_handling": "skip_gracefully"
+        },
+        {
+          "type": "corrupted_pdf",
+          "count": 2,
+          "expected_handling": "error_recovery"
+        },
+        {
+          "type": "multi_page_mixed",
+          "count": 5,
+          "expected_handling": "page_classification"
+        },
+        {
+          "type": "handwritten",
+          "count": 5,
+          "expected_handling": "low_confidence_extraction"
+        }
+      ]
+    }
+  ],
+  "performance_targets": {
+    "documents_per_second": 2,
+    "memory_per_document": "10MB",
+    "error_recovery_time": "<5s",
+    "ui_update_frequency": "real_time"
+  }
+}

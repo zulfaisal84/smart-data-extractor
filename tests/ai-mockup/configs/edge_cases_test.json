@@ -1,0 +1,132 @@
+{
+  "name": "Edge Cases Test Suite",
+  "description": "Test handling of unusual and problematic documents",
+  "created": "2025-08-02",
+  "test_cases": [
+    {
+      "category": "Document Quality Issues",
+      "tests": [
+        {
+          "name": "Extremely Blurry Photo",
+          "file": "tests/test-documents/edge-cases/blurry_receipt.jpg",
+          "expected_behavior": "Partial extraction with low confidence",
+          "min_fields_extracted": 1,
+          "user_assistance": true
+        },
+        {
+          "name": "Skewed Scan",
+          "file": "tests/test-documents/edge-cases/skewed_invoice.pdf",
+          "expected_behavior": "Auto-rotation and extraction",
+          "rotation_detection": true
+        },
+        {
+          "name": "Faded Thermal Receipt",
+          "file": "tests/test-documents/edge-cases/faded_thermal.jpg",
+          "expected_behavior": "Enhanced processing attempt",
+          "enhancement_applied": true
+        }
+      ]
+    },
+    {
+      "category": "Unusual Formats",
+      "tests": [
+        {
+          "name": "Handwritten Invoice",
+          "file": "tests/test-documents/edge-cases/handwritten_invoice.jpg",
+          "expected_behavior": "Handwriting recognition mode",
+          "confidence_threshold": 60
+        },
+        {
+          "name": "Multi-language Document",
+          "file": "tests/test-documents/edge-cases/multilingual_invoice.pdf",
+          "languages": ["English", "Spanish", "Chinese"],
+          "expected_behavior": "Extract all languages",
+          "primary_language_detection": true
+        },
+        {
+          "name": "Carbon Copy",
+          "file": "tests/test-documents/edge-cases/carbon_copy.jpg",
+          "expected_behavior": "Low contrast enhancement",
+          "preprocessing": "contrast_boost"
+        }
+      ]
+    },
+    {
+      "category": "File Issues",
+      "tests": [
+        {
+          "name": "Corrupted PDF",
+          "file": "tests/test-documents/edge-cases/corrupted.pdf",
+          "expected_behavior": "Graceful error message",
+          "error_type": "file_corrupted"
+        },
+        {
+          "name": "Password Protected",
+          "file": "tests/test-documents/edge-cases/password_protected.pdf",
+          "expected_behavior": "Request password",
+          "error_type": "password_required"
+        },
+        {
+          "name": "Huge File",
+          "file": "tests/test-documents/edge-cases/huge_file_50mb.pdf",
+          "expected_behavior": "Size limit warning",
+          "max_size_mb": 10
+        }
+      ]
+    },
+    {
+      "category": "Content Issues",
+      "tests": [
+        {
+          "name": "Blank Pages",
+          "file": "tests/test-documents/edge-cases/blank_pages.pdf",
+          "expected_behavior": "Skip blank pages message",
+          "continue_processing": false
+        },
+        {
+          "name": "Non-Document Image",
+          "file": "tests/test-documents/edge-cases/cat_photo.jpg",
+          "expected_behavior": "Not a document message",
+          "document_detection": false
+        },
+        {
+          "name": "Multiple Receipts in One Photo",
+          "file": "tests/test-documents/edge-cases/multiple_receipts.jpg",
+          "expected_behavior": "Detect multiple documents",
+          "split_suggestion": true
+        }
+      ]
+    },
+    {
+      "category": "Data Extraction Challenges",
+      "tests": [
+        {
+          "name": "Ambiguous Totals",
+          "file": "tests/test-documents/edge-cases/multiple_totals.pdf",
+          "description": "Invoice with subtotal, tax, shipping, and total",
+          "expected_behavior": "Request user clarification",
+          "fields_needing_clarification": ["total_amount"]
+        },
+        {
+          "name": "Missing Key Fields",
+          "file": "tests/test-documents/edge-cases/no_invoice_number.pdf",
+          "expected_behavior": "Flag missing required fields",
+          "missing_fields": ["invoice_number"],
+          "continue_anyway": true
+        },
+        {
+          "name": "Duplicate Detection",
+          "file": "tests/test-documents/edge-cases/duplicate_upload.pdf",
+          "expected_behavior": "Warn about potential duplicate",
+          "duplicate_check": true
+        }
+      ]
+    }
+  ],
+  "error_handling_verification": {
+    "user_messaging": "Clear, actionable error messages",
+    "recovery_options": "Always provide next steps",
+    "logging": "Detailed error logs for debugging",
+    "metrics": "Track error frequency and types"
+  }
+}
