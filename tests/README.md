@@ -1,24 +1,54 @@
-# Smart Data Extractor - AI Testing Suite
+# Smart Data Extractor - Testing & Prototypes
 
-This directory contains all testing infrastructure for validating AI extraction capabilities before building the UI.
+This directory contains all testing infrastructure, prototypes, and validation systems for the Smart Data Extractor project.
+
+## 🚨 TWO SEPARATE SYSTEMS
+- **OCR System (Port 5001)**: Extracts actual data from documents → `/tests/ocr-prototype/`
+- **Pattern Recognition (Port 5002)**: Identifies document types only → `/tests/pattern-recognition/`
+
+## ✅ Recent Folder Structure Improvements (August 3, 2025)
+
+**Consistent Test Organization**: All test folders now follow the same structure with test code and reports properly organized in `tests/` subdirectories for better maintainability and navigation.
 
 ## 📁 Directory Structure
 
 ```
 tests/
-├── ai-mockup/           # AI service testing code
-│   ├── test-runner.py   # Main test execution script
-│   ├── configs/         # Test configuration files
-│   └── results/         # Test results (auto-generated)
+├── README.md                    # This file - testing overview
+├── AI_TESTING_CHECKLIST.md     # AI testing guidelines
 │
-├── test-documents/      # Sample documents for testing
-│   ├── invoices/        # Invoice samples
-│   ├── receipts/        # Receipt samples
-│   ├── purchase-orders/ # PO samples
-│   ├── mixed-batches/   # Mixed document sets
-│   └── edge-cases/      # Problematic documents
+├── ai-mockup/                   # AI service testing framework
+│   ├── configs/                 # Test configurations
+│   ├── results/                 # Test results storage
+│   └── test-runner.py           # Test execution script
 │
-└── AI_TESTING_CHECKLIST.md  # Comprehensive testing guide
+├── ocr-prototype/               # OCR prototype and tests ✅ REORGANIZED
+│   ├── README.md                # OCR setup guide
+│   ├── server.py                # Main OCR server
+│   ├── [implementation files]   # Core system files
+│   ├── test-documents/          # Test data files
+│   ├── uploads/                 # Uploaded files storage
+│   └── tests/                   # ✅ All test code and reports here
+│       ├── test_*.py            # Python test files
+│       ├── *_REPORT.md          # Test reports and documentation
+│       └── run_*.py             # Test execution scripts
+│
+├── pattern-recognition/         # Pattern Recognition System (Phase 1 Complete)
+│   ├── README.md                # Pattern recognition setup guide
+│   ├── server.py                # Main Flask server
+│   ├── [implementation files]   # Core system files
+│   ├── test-documents/          # Test data files
+│   ├── uploads/                 # Uploaded files storage
+│   └── tests/                   # ✅ All test code and reports here
+│       ├── test_pattern_services.py     # Python test files
+│       └── QA_VALIDATION_REPORT.md      # ✅ Moved here for consistency
+│
+└── test-documents/              # Shared test document library
+    ├── invoices/                # Invoice samples
+    ├── receipts/                # Receipt samples
+    ├── purchase-orders/         # PO samples
+    ├── mixed-batches/           # Mixed document sets
+    └── edge-cases/              # Problematic documents
 ```
 
 ## 🚀 Quick Start
